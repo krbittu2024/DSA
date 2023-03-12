@@ -24,6 +24,7 @@ public class Solution {
         public SinglyLinkedList() {
             this.head = null;
         }
+
       
     }
 
@@ -51,7 +52,16 @@ public class Solution {
      *
      */
     static SinglyLinkedListNode insertNodeAtTail(SinglyLinkedListNode head, int data) {
-
+SinglyLinkedListNode llist_tail = new SinglyLinkedListNode(data);
+if(head==null){
+    return llist_tail;
 }
+SinglyLinkedListNode temp=head;
+while(temp.next!=null){
+    temp=temp.next;
+}
+temp.next=llist_tail;
+return head;
+    }
 
     private static final Scanner scanner = new Scanner(System.in);
