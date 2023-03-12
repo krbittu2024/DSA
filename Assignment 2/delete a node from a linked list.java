@@ -4,43 +4,46 @@ import java.security.*;
 import java.text.*;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.function.*;
 import java.util.regex.*;
+import java.util.stream.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 
-public class Solution {
+class SinglyLinkedListNode {
+    public int data;
+    public SinglyLinkedListNode next;
 
-    static class SinglyLinkedListNode {
-        public int data;
-        public SinglyLinkedListNode next;
+    public SinglyLinkedListNode(int nodeData) {
+        this.data = nodeData;
+        this.next = null;
+    }
+}
 
-        public SinglyLinkedListNode(int nodeData) {
-            this.data = nodeData;
-            this.next = null;
-        }
+class SinglyLinkedList {
+    public SinglyLinkedListNode head;
+    public SinglyLinkedListNode tail;
+
+    public SinglyLinkedList() {
+        this.head = null;
+        this.tail = null;
     }
 
-    static class SinglyLinkedList {
-        public SinglyLinkedListNode head;
-        public SinglyLinkedListNode tail;
+    public void insertNode(int nodeData) {
+        SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
 
-        public SinglyLinkedList() {
-            this.head = null;
-            this.tail = null;
+        if (this.head == null) {
+            this.head = node;
+        } else {
+            this.tail.next = node;
         }
 
-        public void insertNode(int nodeData) {
-            SinglyLinkedListNode node = new SinglyLinkedListNode(nodeData);
-
-            if (this.head == null) {
-                this.head = node;
-            } else {
-                this.tail.next = node;
-            }
-
-            this.tail = node;
-        }
+        this.tail = node;
     }
+}
 
-    public static void printSinglyLinkedList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
+class SinglyLinkedListPrintHelper {
+    public static void printList(SinglyLinkedListNode node, String sep, BufferedWriter bufferedWriter) throws IOException {
         while (node != null) {
             bufferedWriter.write(String.valueOf(node.data));
 
@@ -51,6 +54,7 @@ public class Solution {
             }
         }
     }
+}
 
 class Result {
 
@@ -74,10 +78,20 @@ class Result {
      */
 
     public static SinglyLinkedListNode deleteNode(SinglyLinkedListNode llist, int position) {
-    // Write your code here
+    // Write your code here4
+     if (position == 0) {
+            return llist.next;
+        }
 
+        SinglyLinkedListNode current= llist;
+        while (position!= 1) {
+            current = current.next;
+            position--;
+        }
+        current.next = current.next.next;
+        return llist;
     }
 
 }
 
-    private static final Scanner scanner = new Scanner(System.in);
+public class Solution {
