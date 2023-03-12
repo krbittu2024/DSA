@@ -78,8 +78,32 @@ class Result {
      */
 
     public static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode llist, int data) {
-    // Write your code here
-
+        DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
+        if(llist == null)return newNode;
+        
+        DoublyLinkedListNode current= llist;
+        DoublyLinkedListNode previous = null;
+        
+        if(data < current.data){
+            newNode.next = current;
+            newNode.prev = null;
+            current.prev = newNode;
+            return newNode;
+        }
+        while(current != null && data > current.data){
+            previous = current;
+            current = current.next;
+        }
+        if(current == null){
+            newNode.prev = previous;
+            newNode.next = null;
+            previous.next = newNode;
+        }else{
+            newNode.prev = previous;
+            newNode.next = previous.next;
+            newNode.next.prev = newNode;
+        }
+        return llist;
     }
 
 }
